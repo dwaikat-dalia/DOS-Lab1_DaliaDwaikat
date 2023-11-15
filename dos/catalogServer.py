@@ -76,7 +76,7 @@ def update(item_number):
     else:
         return jsonify({'error': 'Item not found'}), 404
     
-#to get the catalog to order.py    
+#to get the catalog to orderServer.py    
 @app.route('/get_catalog', methods=['GET'])
 def get_catalog():
     return jsonify(catalog)
