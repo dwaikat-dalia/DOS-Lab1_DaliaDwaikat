@@ -56,14 +56,6 @@ def get_catalog():
 
 catalog = get_catalog()
 #print(catalog['1'])
-'''
-if catalog:
-    print("Catalog Data:")
-    for item_number, item_info in catalog.items():
-        print(f"Item {item_number}: {item_info}")
-else:
-    print("Failed to retrieve catalog data.")
-'''
 
 # Endpoint for purchase
 @app.route('/purchase/<int:item_number>', methods=['POST'])
