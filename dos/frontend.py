@@ -26,3 +26,11 @@ def search(topic):
         return jsonify({'error': f'Error from catalog server: {response.status_code}'}), 500
 
 
+
+@app.route('/info/<int:item_number>', methods=['GET'])
+def info(item_number):
+    response = requests.get(f"{catalog_server_url}/query/{item_number}")
+    item_data = response.json()
+    print("Yes this is info")
+
+    return jsonify(item_data)
