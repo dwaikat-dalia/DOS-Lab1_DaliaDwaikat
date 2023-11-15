@@ -27,15 +27,7 @@ with open('catalog.txt', 'r') as file:
             'topic': topic
         }
 print(catalog)        
-'''        
-# Mock data for the catalog (you would typically use a database)
-catalog = {
-    1: {'title': 'How to get a good grade in DOS in 40 minutes a day', 'stock': 10, 'cost': 20, 'topic': 'distributed systems'},
-    2: {'title': 'RPCs for Noobs', 'stock': 5, 'cost': 30, 'topic': 'distributed systems'},
-    3: {'title': 'Xen and the Art of Surviving Undergraduate School', 'stock': 8, 'cost': 25, 'topic': 'undergraduate school'},
-    4: {'title': 'Cooking for the Impatient Undergrad', 'stock': 12, 'cost': 15, 'topic': 'undergraduate school'}
-}
-'''
+
 @app.route('/query/<int:item_number>', methods=['GET'])
 def query(item_number):
     # Code to handle query-by-item
