@@ -34,3 +34,18 @@ def info(item_number):
     print("Yes this is info")
 
     return jsonify(item_data)
+
+
+@app.route('/purchase/<int:item_number>', methods=['POST'])
+def purchase(item_number):
+   
+    # Check if item is in stock by querying the catalog server
+    purchase_response = requests.post(f"{order_server_url}/purchase/{item_number}")
+    
+    if purchase_response.status_code == 200:
+        return jsonify(purchase_response.json())
+    else:
+        return jsonify(purchase_response.json()),404
+    
+if __name__ == '__main__':
+    app.run(port=5000)
