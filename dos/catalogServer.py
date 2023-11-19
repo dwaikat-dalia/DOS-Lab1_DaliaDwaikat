@@ -9,6 +9,24 @@ def update_catalog_item(file_path):
         # Write data
         for item_number, info in catalog.items():
             file.write(f"{item_number},{info['title']},{info['stock']},{info['cost']},{info['topic']}\n")
+        
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+        for line in lines[1:]:
+            columns = line.strip().split(',')
+            item_number = int(columns[0])
+            title = columns[1]
+            stock = int(columns[2])
+            cost = float(columns[3])
+            topic = columns[4]
+
+            catalog[item_number] = {
+                'title': title,
+                'stock': stock,
+                'cost': cost,
+                'topic': topic
+            }
+
 
 with open('catalog.txt', 'r') as file:
     lines = file.readlines()
@@ -28,6 +46,10 @@ with open('catalog.txt', 'r') as file:
         }
 print(catalog)        
 
+@app.route('/', methods=['GET'])
+def hello():
+    return jsonify({'message':'Hello Catalog Server'})
+   
 @app.route('/query/<int:item_number>', methods=['GET'])
 def query(item_number):
     # Code to handle query-by-item
@@ -71,7 +93,8 @@ def update(item_number):
 #to get the catalog to orderServer.py    
 @app.route('/get_catalog', methods=['GET'])
 def get_catalog():
+    
     return jsonify(catalog)
 
 if __name__ == '__main__':
-    app.run(port=5002)
+    app.run(host='0.0.0.0', port=5002)

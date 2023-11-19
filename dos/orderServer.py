@@ -3,7 +3,7 @@ from flask import Flask, jsonify,request
 import requests
 
 app = Flask(__name__)
-CATALOG_SERVER_URL = "http://127.0.0.1:5002"
+CATALOG_SERVER_URL = "http://localhost:5002"
 
 # Mock data for order server (you would typically use a database)
 orders = {}
@@ -50,13 +50,16 @@ def get_catalog():
     
     if response.status_code == 200:
         print("Data geted succesfully")
+        print(response.json())
         return response.json()
     else:
         return None
 
 catalog = get_catalog()
 #print(catalog['1'])
-
+@app.route('/', methods=['GET'])
+def heelo():
+    return jsonify({'message': 'Hello Order Server!'}) 
 # Endpoint for purchase
 @app.route('/purchase/<int:item_number>', methods=['POST'])
 def purchase(item_number):
@@ -66,6 +69,7 @@ def purchase(item_number):
     # ...
     #print(item_number)
     #print(catalog)
+    catalog = get_catalog()
     item = catalog[str(item_number)]
 
     if item is not None:
@@ -87,4 +91,4 @@ def purchase(item_number):
         return jsonify({'error': 'Item not found'}), 404
 
 if __name__ == '__main__':
-    app.run(port=5003)
+    app.run(host='0.0.0.0', port=5003)
