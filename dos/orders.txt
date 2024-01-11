@@ -1,5 +1,0 @@
-id,title,sold
-1,How to get a good grade in DOS in 40 minutes a day,4
-2,RPCs for Noobs,14
-3,Xen and the Art of Surviving Undergraduate School,0
-4,Cooking for the Impatient Undergrad,7
