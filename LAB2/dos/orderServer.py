@@ -34,17 +34,17 @@ with open('orders.txt', 'r') as file:
 print(orders) 
 
 #replica
-@app.route('/UpdateorderFORORDER/<int:item_number>', methods=['PUT'])
+@app.route('/UpdateorderFORORDER/<int:item_number>', methods=['GET'])
 def update_orderEE(item_number):
      orders[item_number]['sold']+=1
      update_order_item('orders.txt')
 
 
-@app.route('/Updateorder/<int:item_number>', methods=['PUT'])
+@app.route('/Updateorder/<int:item_number>', methods=['GET'])
 def update_order(item_number):
      orders[item_number]['sold']+=1
      
-     response = requests.put(f"http://localhost:5005/Updateorder_replica_RE/{item_number}")
+     response = requests.get(f"http://localhost:5005/Updateorder_replica_RE/{item_number}")
 
 #    response = requests.put(f"{CATALOG_SERVER_URL}/update/{item_number}", json=updated_info)
      if response.status_code == 200:
